@@ -1,0 +1,15 @@
+{
+  "name": "hasContent()",
+  "version": "0.0.2",
+  "description": "your object has any content?",
+  "main": "hasContent.ts",
+  "author": "nominalrune",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.22",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.0",
+    "typescript": "^4.1.3"
+  }
+}
