@@ -1,10 +1,10 @@
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
-		"jsx": "react"
+		"jsx": "react",
+		"noEmit": true
 	},
 	"include": [
-		"src/App",
-		"src/components"
+		"hasContent.test.ts",
 	]
 }

@@ -1,25 +1,37 @@
 export default function hasContent(
 	target: any,
-	options: { acceptZero?: boolean, acceptFunction?: boolean } = { acceptZero: true, acceptFunction: true },
+	accepts: ('zero' | '')[] = [],
+	rejects: ('function')[] = [],
 	seekDepth = 5
 ): boolean {
-	const { acceptZero, acceptFunction } = options;
-	return (
-		(target === 0 && acceptZero) ||
-		(target && !(target instanceof Object)) ||
-		(target instanceof Function && acceptFunction) ||
-		(Symbol.iterator in target && [...target].some
-			((i) => (
-				i && seekDepth > 0 ?
-					hasContent(i, options || {}, --seekDepth) :
-					false)) ||
-			(target instanceof Function && acceptFunction) ||
+	return !!(
+		(
+			(target === 0 && accepts.includes('zero'))
+			|| (target instanceof Function && !rejects.includes('function'))
+			|| target && !(target instanceof Object)
+			|| null
+		)
+		??
+		(
+			(target && !(target instanceof Object))
+			||
+			(target?.[Symbol.iterator] && [...target].length &&
+				[...(target.values())].some((i) => (
+					seekDepth > 0
+						? hasContent(i, accepts, rejects, --seekDepth)
+						: false
+				))
+			)
+		)
+		??
+		(
 			(target instanceof Object &&
 				Object.getOwnPropertyNames(target).length &&
 				Object.getOwnPropertyNames(target).some((i) => (
-					i && seekDepth > 0 ?
-						hasContent(i, options || {}, --seekDepth) :
-						false))
+					seekDepth > 0
+						? hasContent(target[i], accepts, rejects, --seekDepth)
+						: false
+				))
 			)
 		)
 	)

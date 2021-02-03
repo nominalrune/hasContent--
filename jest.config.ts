@@ -24,6 +24,7 @@ export default {
 		"**/*.{js,jsx}",
 		"**/*.{ts,tsx}",
 		"!**/*.stories.tsx",
+		"!jest.config.ts"
 	],
 
 	// The directory where Jest should output its coverage files

@@ -1,5 +1,5 @@
 {
-  "name": "hasContent()",
+  "name": "has_content",
   "version": "0.0.2",
   "description": "your object has any content?",
   "main": "hasContent.ts",
