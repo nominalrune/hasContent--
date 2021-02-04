@@ -162,3 +162,12 @@ describe('Symbol always true', () => {
 		expect(hasContent(Symbol(0))).toBeTruthy();
 	});
 });
+
+
+describe('Number, String class', () => {
+	test('Number is regarded as type number, not Number',()=>{
+		const a= new Number(2)
+		console.dir(a);
+		expect(hasContent(a)).toBeTruthy();
+	})
+});
