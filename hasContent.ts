@@ -6,16 +6,10 @@ export default function hasContent(
 ): boolean {
 	return !!(
 		(
-			(target === 0 && accepts.includes('zero'))
+			(accepts.includes('zero') && (target === 0))
 			|| (target instanceof Function && !rejects.includes('function'))
 			|| target && !(target instanceof Object)
-			|| null
-		)
-		??
-		(
-			(target && !(target instanceof Object))
-			||
-			(target?.[Symbol.iterator] && [...target].length &&
+			|| (target?.[Symbol.iterator] && [...target].length &&
 				[...(target.values())].some((i) => (
 					seekDepth > 0
 						? hasContent(i, accepts, rejects, --seekDepth)
@@ -32,7 +26,7 @@ export default function hasContent(
 						? hasContent(target[i], accepts, rejects, --seekDepth)
 						: false
 				))
-			)
+			)//||hasContent(JSON.parse(JSON.stringify(target)), accepts, rejects, 0)
 		)
 	)
 }

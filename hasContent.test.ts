@@ -43,10 +43,10 @@ describe('simple arrays', () => {
 	test('param: [] to be false', () => {
 		expect(hasContent([])).toBeFalsy();
 	});
-	test('param:[ [] ]to be false', () => {
+	test('param: [[]] to be false', () => {
 		expect(hasContent([[]])).toBeFalsy();
 	});
-	test('param:[ [],[] ]to be false', () => {
+	test('param: [[],[]] to be false', () => {
 		expect(hasContent([[], []])).toBeFalsy();
 	});
 	test('param: [true] to be true', () => {
@@ -77,7 +77,7 @@ describe('simple objects', () => {
 		expect(hasContent({ a: { b: undefined } })).toBeFalsy();
 	});
 	test('param: {a:{b:{c:{d:{e:{f:true}}}}}} to be false', () => {
-		expect(hasContent({ a: { b: {c:{d:{e:{f:true}}}} } })).toBeFalsy();
+		expect(hasContent({ a: { b: { c: { d: { e: { f: true } } } } } })).toBeFalsy();
 	});
 });
 
@@ -115,7 +115,7 @@ describe('Map', () => {
 	})
 	test('Map with truthy (nested) value should be true', () => {
 		const map = new Map();
-		map.set('foo', {"ye":['suis']});
+		map.set('foo', { "ye": ['suis'] });
 		expect(
 			hasContent(map)
 		).toBeTruthy();
@@ -139,7 +139,7 @@ describe('Set', () => {
 	})
 	test('set with truthy (nested) value should be true', () => {
 		const set = new Set();
-		set.add({"ye":['suis']});
+		set.add({ "ye": ['suis'] });
 		expect(
 			hasContent(set)
 		).toBeTruthy();
@@ -165,9 +165,8 @@ describe('Symbol always true', () => {
 
 
 describe('Number, String class', () => {
-	test('Number is regarded as type number, not Number',()=>{
-		const a= new Number(2)
-		console.dir(a);
-		expect(hasContent(a)).toBeTruthy();
+	test('Number is regarded as type number, not Number', () => {
+		const a = new Number(2);
+		expect(hasContent(a)).toBeTruthy()
 	})
 });
